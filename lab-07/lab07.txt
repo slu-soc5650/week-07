@@ -1,0 +1,101 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/lab07.txt
+  log type:  text
+ opened on:   7 Mar 2016, 11:58:18
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - lab07.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - replicating lab-07
+>                                                                               
+>          
+> created - 24 Feb 2016
+> 
+> updated - 24 Feb 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This file fully replicates the Stata portion of Lab-07 (Part 4)
+> */
+. 
+. /* 
+> updates - 
+> none
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> This file requires the file census.dta, which comes pre-installed with Stata
+> */
+. 
+. /* 
+> subordinates - 
+> none
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. open data
+. sysuse census.dta
+(1980 Census data by state)
+
+. 
+. // 2. save copy of data
+. save censusLab07.dta, replace
+(note: file censusLab07.dta not found)
+file censusLab07.dta saved
+
+. 
+. // 3. create string versions
+. tostring death, generate(deathStr) force
+deathStr generated as str6
+
+. tostring marriage, generate(marriageStr) force
+marriageStr generated as str6
+
+. tostring divorce, generate(divorceStr) force
+divorceStr generated as str6
+
+. 
+. // 4. destring variables created in step 3
+. destring deathStr, generate(deathNum)
+deathStr has all characters numeric; deathNum generated as long
+
+. destring marriageStr, generate(marriageNum)
+marriageStr has all characters numeric; marriageNum generated as long
+
+. destring divorceStr, generate(divorceNum)
+divorceStr has all characters numeric; divorceNum generated as long
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // standard closing options
+. 
+. log close _all
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/lab07.txt
+  log type:  text
+ closed on:   7 Mar 2016, 11:58:18
+--------------------------------------------------------------------------------
