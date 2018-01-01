@@ -1,6 +1,6 @@
 lecture-07 <img src="https://slu-soc5650.github.io/images/logo.png" align="right" />
 ===========================================================
-![](https://img.shields.io/badge/semester-Spring%2C%202017-blue.svg) ![](https://img.shields.io/badge/release-updated-brightgreen.svg)
+![](https://img.shields.io/badge/semester-Spring%2C%202017-blue.svg) ![](https://img.shields.io/badge/release-updated-brightgreen.svg) ![](https://img.shields.io/github/last-commit/slu-soc5650/lecture-07.svg) ![](https://img.shields.io/github/repo-size/slu-soc5650/lecture-07.svg)
 
 This repository contains files for:
 
@@ -11,6 +11,9 @@ This repository contains files for:
 -   `LICENSE.md`
 -   `README.md`
 -   `.gitignore`
+
+### License Information
+The included code is licensed under a [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) (see [`LICENSE`](LICENSE)). All exercises (including labs, problem sets, lecture preps, and other activities), documentation files, and lecture slides are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) (see [`LICENSE_TEXT.md`](LICENSE_TEXT.md)).
 
 ### About SOC 4650 & 5650: Introduction to GIS
 This class introduces both the theoretical and technical skills that constitute the nascent field of Geographic Information Science (GISc). Techniques introduced include data cleaning and management, map production and cartography, and the manipulation of both tabular and spatial data. The impacts of GISc on public policy, and the effects of public policy on GISc, are also discussed. The course incorporates a wide variety of social, economic, health, urban, meteorological, and environmental data. These data are mapped at a variety of extents, from the City of St. Louis to the St. Louis Metropolitan region, Missouri, all United States counties, and all U.S. states. More details are available on the [course website](https://slu-soc5650.github.io).
