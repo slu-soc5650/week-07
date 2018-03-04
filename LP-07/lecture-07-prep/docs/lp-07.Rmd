@@ -1,0 +1,52 @@
+---
+title: "Lecture Prep 07 Replication"
+author: "Christopher Prener, Ph.D."
+date: '(`r format(Sys.time(), "%B %d, %Y")`)'
+output: 
+  github_document: default
+  html_notebook: default 
+---
+
+## Introduction
+This is the replication notebook for LP-07 from the course SOC 4650/5650: Introduction to GISc. 
+
+## Load Dependencies
+The following code loads the package dependencies for our analysis:
+
+```{r package-load}
+# tidyverse
+library(readr) # reading/writing csv files
+
+# other packages
+library(here) # working directory tools
+library(sf) # spatial data tools
+```
+
+## Load Data
+The following code loads the data package and assigns our data to a data frame in our global environment. The `stl_as_sf()` function can be used to convert certain tables in stlData into `sf` objects.
+
+```{r data-load}
+library(stlData)
+leadTibble <- stl_tbl_lead
+leadSf <- stl_as_sf(stl_tbl_lead)
+```
+
+## Part 1
+### Question 2
+The `write_csv()` function from `readr` can be used to write tabular data from `R`:
+
+```{r}
+write_csv(leadTibble, here("data", "leadTibble.csv"))
+```
+
+We now have a `.csv` file saved in our data folder containing the `leadTibble` data.
+
+## Part 2
+### Question 4
+The `st_write()` function from `sf` can be used to write shapefile data from `R`:
+
+```{r}
+st_write(leadSf, here("data", "leadData.shp"), delete_dsn = TRUE)
+```
+
+We now have a `.shp` file saved in our data folder containing the `leadSf` data. If you try and knit your notebook without the `delete_dsn` option, you will get an error that the data already exist and the file will not be created. If you try and execute your code with the `delete_dsn` option *and* you have not already done so, you will get an error that the file does not appear in the specified directory. However, the file *will* still be created.
