@@ -1,3 +1,7 @@
+# lecture-07 v18.1.1
+
+* Add replication files for LP-07
+
 # lecture-07 v18.1.0
 
 * Add `NEWS.md`
