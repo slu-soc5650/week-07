@@ -1,3 +1,7 @@
+# lecture-07 v18.2.0
+
+* Add functions handout, Lab-06, and slides
+
 # lecture-07 v18.1.1
 
 * Add replication files for LP-07
