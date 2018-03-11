@@ -1,0 +1,3 @@
+The weather data are from the National Weather Service's [Storm Prediction Center](http://www.spc.noaa.gov/gis/svrgis/). They were provided through the course data release. 
+
+Two new shapefiles were created by processing the tornado data from the Storm Prediction Center. The fields were updated so that there was both a state abbreviation variable and a state name variable. There are also properly formatted date variables that are also clearly named for full date, year, month, and day. Finally, the tornado data were subset so that there is now a pre-2000 shapefile and a 2000 and more recent shapefile.

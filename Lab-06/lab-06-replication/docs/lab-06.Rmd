@@ -1,0 +1,113 @@
+---
+title: "Lab 06 Replication Notebook"
+author: "Christopher Prener, Ph.D."
+date: '(`r format(Sys.time(), "%B %d, %Y")`)'
+output: 
+  github_document: default
+  html_notebook: default 
+---
+
+## Introduction
+This is the replication notebook for Lab-04 from the course SOC 4650/5650: Introduction to GISc. 
+
+## Load Dependencies
+The following code loads the package dependencies for our analysis:
+
+```{r package-load}
+# tidyverse packages
+library(dplyr) # data wrangling
+library(lubridate) # working with dates
+library(stringr) # working with strings
+
+# other packages
+library(here) # working directory tools
+library(sf) # spatial data tools
+```
+
+## Load Data
+The following code loads the data package and assigns our data to a data frame in our global environment:
+
+```{r data-load}
+hailEvents <- st_read(here("data","rawData", "METRO_WX_Hail.shp"), stringsAsFactors = FALSE)
+```
+
+## Part 3
+### Question 10 
+The following block removes the pre-existing year, month, and day variables.
+
+```{r remove-dates}
+hailEvents <- select(hailEvents, -yr, -mo, -dy)
+```
+
+### Question 11
+The following pipe takes the edited hail data and converts the `date` variable from a string to a properly formatted date. Individual variables are then produced for the different components of the date, include day, month, and year.
+
+```{r create-dates}
+hailEvents %>%
+  mutate(date = ymd(date)) %>%
+  mutate(year = year(date)) %>%
+  mutate(month = month(date)) %>%
+  mutate(day = date(date)) -> hailEvents
+```
+
+We now have a well formatted, and clearly named (unlike the initial variables), set of the date variables to work with.
+
+### Question 12
+The following `ifelse()` statement below is the way we have been working with strings up to this point. If a string literally contains an exact match, we make one change. Otherwise, we make a different change. In this case, we take the state abbreviation data and modify them so we can practice working with strings:
+
+```{r add-bad-string}
+hailEvents %>%
+  mutate(st = ifelse(st == "MO", "State of Missouri;", "State of Illinois;")) -> hailEvents
+```
+
+We now have an edited state name variable that contains both the valid data as well as a semi-colon.
+
+### Question 13
+The following pipe replaces the semi-colon with nothing, then edits both state names without dealing with the literal contents of each variable. If the words "Missouri" or "Illinois" are detected, they are replaced with the appropriate abbreviation. The values are then capitalized completely. We make use of the `word()` function to be able to re-create a state abbreviation variable, again without dealing with the full contents of each value. We also create two logical variables identifying both Illinois and Missouri.
+
+```{r clean-strings}
+hailEvents %>%
+  mutate(st = str_replace(st, "[;]", "")) %>%
+  mutate(st = str_replace(st, "Missouri", "MO")) %>% 
+  mutate(st = str_replace(st, "Illinois", "IL")) %>%
+  mutate(st = str_to_upper(st)) %>%
+  mutate(stAbbrev = ifelse(word(st, 3) == "MO", "MO", "IL")) %>%
+  mutate(illinois = ifelse(str_detect(stAbbrev, "IL"), TRUE, FALSE)) %>%
+  mutate(missouri = ifelse(str_detect(stAbbrev, "MO"), TRUE, FALSE)) -> cleanHail
+```
+
+We have now re-modified the string data so that we have a set of variables with the full name of the state as well as an abbreviation and a logical indicator.
+
+### Question 14
+We can use skills from earlier in the semester to subset our data by year. There are two ways to do this. One is to use the `year` variable we created:
+
+```{r subset-01}
+hailPre2000 <- filter(cleanHail, year < 2000)
+hailPost2000 <- filter(cleanHail, year >= 2000)
+```
+
+The other is to use the `date` variable:
+
+```{r subset-02}
+hailPre2000_v2 <- filter(cleanHail, year(date) < 2000)
+hailPost2000_v2 <- filter(cleanHail, year(date) >= 2000)
+```
+
+Since the `date` variable has been converted to a date from a character variable, we can use operators on it just like we would a numeric variable!
+
+### Question 15
+Finally, we can save our newly created data to shapefiles:
+
+```{r export}
+st_write(hailPre2000, here("data", "cleanedData", "hailPre2000.shp"), delete_dsn = TRUE)
+st_write(hailPost2000, here("data", "cleanedData", "hailPost2000.shp"), delete_dsn = TRUE)
+```
+
+Notice that the two logical variables - `illinois` and `missouri` - were not included in the export because they are in a format that is not supported by shapefiles. If you have logical data, convert it to character before exporting it:
+
+```{r fix-logical}
+hailPost2000 %>%
+  mutate(illinois = as.character(illinois)) %>%
+  mutate(missouri = as.character(missouri)) -> hailPost2000
+```
+
