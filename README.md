@@ -1,7 +1,7 @@
 lecture-07 <img src="https://slu-soc5650.github.io/images/logo.png" align="right" />
 ===========================================================
 [![](https://img.shields.io/badge/semester-spring%202018-orange.svg)](https://github.com/slu-soc5650/lecture-07)
-[![](https://img.shields.io/badge/release-lecture-red.svg)](https://github.com/slu-soc5650/lecture-07)
+[![](https://img.shields.io/badge/release-full-brightgreen.svg)](https://github.com/slu-soc5650/lecture-07)
 [![](https://img.shields.io/github/release/slu-soc5650/lecture-07.svg?label=version)](https://github.com/slu-soc5650/lecture-07/releases)
 [![](https://img.shields.io/github/last-commit/slu-soc5650/lecture-07.svg)](https://github.com/slu-soc5650/lecture-07/commits/master)
 [![](https://img.shields.io/github/repo-size/slu-soc5650/lecture-07.svg)](https://github.com/slu-soc5650/lecture-07)
@@ -9,7 +9,7 @@ lecture-07 <img src="https://slu-soc5650.github.io/images/logo.png" align="right
 This repository contains files for:
 
 -   `Functions/` - `R` functions for lecture
--   `Lab-06/` - lab 06 handout
+-   `Lab-06/` - lab 06 handout and replication
 -   `LP-07/` - lecture prep 07
 -   `Slides/` - lecture slides
 -   `LICENSE.md`
